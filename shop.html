@@ -439,7 +439,8 @@ function render() {
     const name = entry.bundle?.name || item.name || "Без названия";
     const price = entry.finalPrice ?? "?";
     const rarity = item.rarity?.displayValue || "";
-    const img = entry.bundle?.image || item.images?.smallIcon || item.images?.icon || "";
+    const rawImg = entry.bundle?.image || item.images?.smallIcon || item.images?.icon || "";
+    const img = rawImg ? "https://images.weserv.nl/?url=" + encodeURIComponent(rawImg) + "&w=128&output=webp&q=70" : "";
     const type = getDisplayType(entry);
     const placeholder = (TYPE_LABELS[type] || { icon: "🎮" }).icon;
 
