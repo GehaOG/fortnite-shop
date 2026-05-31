@@ -19,52 +19,36 @@
     --card-bg: rgba(26,34,53,0.9);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Exo 2', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'Exo 2', sans-serif; min-height: 100vh; overflow-x: hidden; }
   body::before {
-    content: '';
-    position: fixed;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
+    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.08) 0%, transparent 50%),
                 radial-gradient(ellipse at 70% 80%, rgba(0,212,255,0.06) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
   }
   .header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(10,14,26,0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 16px;
+    background: rgba(10,14,26,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); padding: 12px 16px;
   }
   .header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .logo {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 20px; font-weight: 700;
+    font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 700;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; white-space: nowrap;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap;
   }
   .search-wrap { flex: 1; position: relative; }
   .search-input {
-    width: 100%; background: var(--bg3);
-    border: 1px solid var(--border); border-radius: 10px;
-    padding: 8px 14px 8px 36px; color: var(--text);
-    font-family: 'Exo 2', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.2s;
+    width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+    padding: 8px 14px 8px 36px; color: var(--text); font-family: 'Exo 2', sans-serif;
+    font-size: 14px; outline: none; transition: border-color 0.2s;
   }
   .search-input::placeholder { color: var(--muted); }
   .search-input:focus { border-color: var(--accent); }
   .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 14px; }
   .filter-btn {
-    width: 38px; height: 38px; background: var(--bg3);
-    border: 1px solid var(--border); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
     cursor: pointer; flex-shrink: 0; transition: border-color 0.2s, background 0.2s;
   }
   .filter-btn:hover, .filter-btn.active { border-color: var(--accent); background: rgba(0,212,255,0.1); }
@@ -72,35 +56,27 @@
   .type-scroll { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
   .type-scroll::-webkit-scrollbar { display: none; }
   .type-tab {
-    flex-shrink: 0; padding: 5px 12px; border-radius: 20px;
-    border: 1px solid var(--border); background: transparent;
-    color: var(--muted); font-family: 'Exo 2', sans-serif;
-    font-size: 12px; font-weight: 500; cursor: pointer;
-    transition: all 0.2s; white-space: nowrap;
+    flex-shrink: 0; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); font-family: 'Exo 2', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap;
     display: flex; align-items: center; gap: 5px;
   }
   .type-tab:hover { border-color: var(--accent); color: var(--accent); }
   .type-tab.active { background: var(--accent); border-color: var(--accent); color: #0a0e1a; font-weight: 600; }
   .tab-icon { font-size: 14px; line-height: 1; }
   .filter-panel {
-    position: fixed; top: 0; right: -100%;
-    width: min(320px, 90vw); height: 100vh;
-    background: var(--bg2); border-left: 1px solid var(--border);
-    z-index: 200; transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
-    overflow-y: auto; padding: 20px;
+    position: fixed; top: 0; right: -100%; width: min(320px, 90vw); height: 100vh;
+    background: var(--bg2); border-left: 1px solid var(--border); z-index: 200;
+    transition: right 0.3s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; padding: 20px;
   }
   .filter-panel.open { right: 0; }
-  .filter-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-    z-index: 199; display: none; backdrop-filter: blur(4px);
-  }
+  .filter-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 199; display: none; backdrop-filter: blur(4px); }
   .filter-overlay.open { display: block; }
   .filter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
   .filter-title { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
   .close-btn {
-    width: 32px; height: 32px; background: var(--bg3);
-    border: 1px solid var(--border); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
     cursor: pointer; color: var(--muted); font-size: 18px; transition: color 0.2s;
   }
   .close-btn:hover { color: var(--text); }
@@ -110,20 +86,18 @@
     letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px;
   }
   .sort-btn {
-    width: 100%; padding: 12px 16px; background: var(--bg3);
-    border: 1px solid var(--border); border-radius: 10px; color: var(--text);
-    font-family: 'Exo 2', sans-serif; font-size: 14px; text-align: left;
-    cursor: pointer; margin-bottom: 8px; display: flex; align-items: center;
+    width: 100%; padding: 12px 16px; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 14px;
+    text-align: left; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center;
     gap: 10px; transition: all 0.2s;
   }
   .sort-btn:hover { border-color: var(--accent); }
   .sort-btn.active { border-color: var(--accent); background: rgba(0,212,255,0.1); color: var(--accent); }
   .sort-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
   .type-filter-btn {
-    width: 100%; padding: 11px 16px; background: var(--bg3);
-    border: 1px solid var(--border); border-radius: 10px; color: var(--text);
-    font-family: 'Exo 2', sans-serif; font-size: 14px; text-align: left;
-    cursor: pointer; margin-bottom: 8px; display: flex; align-items: center;
+    width: 100%; padding: 11px 16px; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-family: 'Exo 2', sans-serif; font-size: 14px;
+    text-align: left; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center;
     gap: 10px; transition: all 0.2s;
   }
   .type-filter-btn:hover { border-color: var(--accent); }
@@ -136,47 +110,25 @@
   .count-bar span { color: var(--accent); }
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   @media(min-width: 480px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-
-  /* CARD */
   .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 14px; overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; cursor: pointer;
     opacity: 0; transform: translateY(16px);
     transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.2s;
   }
   .card.visible { opacity: 1; transform: translateY(0); }
   .card:hover { border-color: rgba(0,212,255,0.4); }
-
-  /* IMAGE SKELETON + lazy */
-  .card-img-wrap {
-    width: 100%; aspect-ratio: 1;
-    background: var(--bg3);
-    position: relative; overflow: hidden;
-  }
+  .card-img-wrap { width: 100%; aspect-ratio: 1; background: var(--bg3); position: relative; overflow: hidden; }
   .card-img-wrap::after {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
-    background-size: 200% 100%;
-    animation: shimmer 1.4s infinite;
+    background-size: 200% 100%; animation: shimmer 1.4s infinite;
   }
   .card-img-wrap.loaded::after { display: none; }
   @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
-  .card-img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
-    opacity: 0; transition: opacity 0.3s ease;
-    position: absolute; inset: 0;
-  }
+  .card-img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity 0.3s ease; position: absolute; inset: 0; }
   .card-img.loaded { opacity: 1; }
-  .card-img-placeholder {
-    width: 100%; aspect-ratio: 1;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
-  }
+  .card-img-placeholder { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 40px; }
   .card-body { padding: 10px; }
   .card-name {
     font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 600;
@@ -250,7 +202,10 @@
 </div>
 
 <script>
-const FORTNITE_API_KEY = "";
+const GITHUB_USER = "GehaOG";
+const GITHUB_REPO = "fortnite-shop";
+const SHOP_DATA_URL = "https://raw.githubusercontent.com/" + GITHUB_USER + "/" + GITHUB_REPO + "/main/shop_data.json";
+
 let allEntries = [];
 let currentSort = null;
 let currentType = "all";
@@ -278,17 +233,10 @@ const TYPE_LABELS = {
 };
 
 function setupObservers() {
-  // Card visibility animation
   cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("visible");
-        cardObserver.unobserve(e.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); cardObserver.unobserve(e.target); } });
   }, { rootMargin: "0px 0px 60px 0px", threshold: 0.05 });
 
-  // Image lazy loading
   imgObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -296,14 +244,8 @@ function setupObservers() {
         const src = img.dataset.src;
         if (src) {
           img.src = src;
-          img.onload = () => {
-            img.classList.add("loaded");
-            img.closest(".card-img-wrap")?.classList.add("loaded");
-          };
-          img.onerror = () => {
-            img.style.display = "none";
-            img.closest(".card-img-wrap")?.classList.add("loaded");
-          };
+          img.onload = () => { img.classList.add("loaded"); img.closest(".card-img-wrap")?.classList.add("loaded"); };
+          img.onerror = () => { img.style.display = "none"; img.closest(".card-img-wrap")?.classList.add("loaded"); };
         }
         imgObserver.unobserve(img);
       }
@@ -313,29 +255,20 @@ function setupObservers() {
 
 async function loadShop() {
   try {
-    const headers = {};
-    if (FORTNITE_API_KEY) headers["Authorization"] = FORTNITE_API_KEY;
-    const r = await fetch("https://fortnite-api.com/v2/shop", { headers });
-    const data = await r.json();
-    allEntries = data?.data?.entries || [];
+    const r = await fetch(SHOP_DATA_URL + "?t=" + Date.now());
+    if (!r.ok) throw new Error("no data");
+    allEntries = await r.json();
     setupObservers();
     buildTypeTabs();
     render();
   } catch(e) {
     document.getElementById("main").innerHTML =
-      "<div class='empty'><div class='empty-icon'>⚠️</div><div class='empty-text'>Не удалось загрузить магазин.<br>Проверь подключение.</div></div>";
+      "<div class='empty'><div class='empty-icon'>⚠️</div><div class='empty-text'>Магазин ещё не загружен ботом.<br>Напиши боту /shop чтобы обновить.</div></div>";
   }
 }
 
-function getItemType(entry) {
-  if (entry.bundle) return "bundle";
-  const items = entry.items || [];
-  if (!items.length) return "other";
-  return (items[0]?.type?.backendValue || "").toLowerCase();
-}
-
 function getDisplayType(entry) {
-  const t = getItemType(entry);
+  const t = (entry.type || "").toLowerCase();
   for (const key of Object.keys(TYPE_LABELS)) {
     if (key !== "all" && t.includes(key)) return key;
   }
@@ -348,8 +281,7 @@ function buildTypeTabs() {
 
   const tabs = document.getElementById("typeTabs");
   const typeFilters = document.getElementById("typeFilters");
-  tabs.innerHTML = "";
-  typeFilters.innerHTML = "";
+  tabs.innerHTML = ""; typeFilters.innerHTML = "";
 
   const types = ["all", ...Object.keys(counts).filter(k => k !== "all" && counts[k] > 0)];
   types.forEach(type => {
@@ -366,10 +298,7 @@ function buildTypeTabs() {
       const btn = document.createElement("button");
       btn.className = "type-filter-btn" + (type === currentType ? " active" : "");
       btn.dataset.type = type;
-      btn.innerHTML =
-        "<span class='type-filter-icon'>" + info.icon + "</span>" +
-        "<span>" + info.label + "</span>" +
-        "<span class='type-filter-count'>" + count + "</span>";
+      btn.innerHTML = "<span class='type-filter-icon'>" + info.icon + "</span><span>" + info.label + "</span><span class='type-filter-count'>" + count + "</span>";
       btn.onclick = () => { currentType = type; updateTypeTabs(); closeFilter(); render(); };
       typeFilters.appendChild(btn);
     }
@@ -380,12 +309,8 @@ function updateTypeTabs() {
   const counts = {};
   allEntries.forEach(e => { const t = getDisplayType(e); counts[t] = (counts[t]||0)+1; });
   const types = ["all", ...Object.keys(counts).filter(k => k !== "all")];
-  document.querySelectorAll(".type-tab").forEach((tab, i) => {
-    tab.classList.toggle("active", types[i] === currentType);
-  });
-  document.querySelectorAll(".type-filter-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.type === currentType);
-  });
+  document.querySelectorAll(".type-tab").forEach((tab, i) => { tab.classList.toggle("active", types[i] === currentType); });
+  document.querySelectorAll(".type-filter-btn").forEach(btn => { btn.classList.toggle("active", btn.dataset.type === currentType); });
 }
 
 function setSort(dir) {
@@ -410,14 +335,10 @@ function render() {
   if (currentType !== "all") entries = entries.filter(e => getDisplayType(e) === currentType);
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
-    entries = entries.filter(e => {
-      const item = (e.items || [])[0] || {};
-      const name = (e.bundle?.name || item.name || "").toLowerCase();
-      return name.includes(q);
-    });
+    entries = entries.filter(e => (e.name || "").toLowerCase().includes(q));
   }
-  if (currentSort === "asc") entries.sort((a,b) => (a.finalPrice||0) - (b.finalPrice||0));
-  if (currentSort === "desc") entries.sort((a,b) => (b.finalPrice||0) - (a.finalPrice||0));
+  if (currentSort === "asc") entries.sort((a,b) => (a.price||0) - (b.price||0));
+  if (currentSort === "desc") entries.sort((a,b) => (b.price||0) - (a.price||0));
 
   const main = document.getElementById("main");
   if (!entries.length) {
@@ -435,12 +356,10 @@ function render() {
   grid.className = "grid";
 
   entries.forEach(entry => {
-    const item = (entry.items || [])[0] || {};
-    const name = entry.bundle?.name || item.name || "Без названия";
-    const price = entry.finalPrice ?? "?";
-    const rarity = item.rarity?.displayValue || "";
-    const rawImg = entry.bundle?.image || item.images?.smallIcon || item.images?.icon || "";
-    const img = rawImg ? "https://images.weserv.nl/?url=" + encodeURIComponent(rawImg) + "&w=128&output=webp&q=70" : "";
+    const name = entry.name || "Без названия";
+    const price = entry.price ?? "?";
+    const rarity = entry.rarity || "";
+    const img = entry.img || "";
     const type = getDisplayType(entry);
     const placeholder = (TYPE_LABELS[type] || { icon: "🎮" }).icon;
 
@@ -449,26 +368,18 @@ function render() {
 
     if (img) {
       card.innerHTML =
-        "<div class='card-img-wrap'>" +
-          "<img class='card-img' data-src='" + img + "' alt=''>" +
-        "</div>" +
-        "<div class='card-body'>" +
-          "<div class='card-name'>" + name + "</div>" +
-          "<div class='card-footer'>" +
-            "<div class='card-price'><img class='vbucks-icon' src='https://fortnite-api.com/images/vbuck.png' alt='V-Bucks'> " + price + "</div>" +
-            (rarity ? "<div class='card-rarity " + getRarityClass(rarity) + "'>" + rarity + "</div>" : "") +
-          "</div>" +
-        "</div>";
+        "<div class='card-img-wrap'><img class='card-img' data-src='" + img + "' alt=''></div>" +
+        "<div class='card-body'><div class='card-name'>" + name + "</div>" +
+        "<div class='card-footer'><div class='card-price'><img class='vbucks-icon' src='https://fortnite-api.com/images/vbuck.png' alt='V-Bucks'> " + price + "</div>" +
+        (rarity ? "<div class='card-rarity " + getRarityClass(rarity) + "'>" + rarity + "</div>" : "") +
+        "</div></div>";
     } else {
       card.innerHTML =
         "<div class='card-img-placeholder'>" + placeholder + "</div>" +
-        "<div class='card-body'>" +
-          "<div class='card-name'>" + name + "</div>" +
-          "<div class='card-footer'>" +
-            "<div class='card-price'><img class='vbucks-icon' src='https://fortnite-api.com/images/vbuck.png' alt='V-Bucks'> " + price + "</div>" +
-            (rarity ? "<div class='card-rarity " + getRarityClass(rarity) + "'>" + rarity + "</div>" : "") +
-          "</div>" +
-        "</div>";
+        "<div class='card-body'><div class='card-name'>" + name + "</div>" +
+        "<div class='card-footer'><div class='card-price'><img class='vbucks-icon' src='https://fortnite-api.com/images/vbuck.png' alt='V-Bucks'> " + price + "</div>" +
+        (rarity ? "<div class='card-rarity " + getRarityClass(rarity) + "'>" + rarity + "</div>" : "") +
+        "</div></div>";
     }
 
     grid.appendChild(card);
@@ -478,7 +389,6 @@ function render() {
   main.innerHTML = "";
   main.appendChild(frag);
 
-  // Observe all cards and images
   main.querySelectorAll(".card").forEach(card => cardObserver.observe(card));
   main.querySelectorAll(".card-img[data-src]").forEach(img => imgObserver.observe(img));
 }
@@ -496,10 +406,7 @@ document.getElementById("filterBtn").onclick = () => {
 };
 document.getElementById("filterOverlay").onclick = closeFilter;
 document.getElementById("closeFilter").onclick = closeFilter;
-document.getElementById("searchInput").addEventListener("input", e => {
-  searchQuery = e.target.value.trim();
-  render();
-});
+document.getElementById("searchInput").addEventListener("input", e => { searchQuery = e.target.value.trim(); render(); });
 
 loadShop();
 </script>
