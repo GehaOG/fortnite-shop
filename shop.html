@@ -482,43 +482,55 @@ async function loadShop() {
   }
 }
 
+function scrollToType(type) {
+  if (type === "all") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const blocks = document.querySelectorAll(".section-block");
+  for (const block of blocks) {
+    if (block.dataset.type === type) {
+      const headerH = document.querySelector(".header").offsetHeight;
+      const top = block.getBoundingClientRect().top + window.scrollY - headerH - 8;
+      window.scrollTo({ top, behavior: "smooth" });
+      return;
+    }
+  }
+}
+
 function buildTypeTabs() {
   const counts = { all: allEntries.length };
   allEntries.forEach(e => { const t = getDisplayType(e); counts[t] = (counts[t]||0)+1; });
 
+  const sectionOrder = ["outfit","pickaxe","emote","backpack","glider","wrap","spray","contrail","loadingscreen","toy","vehicle","pet","shoes","bundle","other","music"];
   const tabs = document.getElementById("typeTabs");
   const typeFilters = document.getElementById("typeFilters");
   tabs.innerHTML = ""; typeFilters.innerHTML = "";
 
-  const types = ["all", ...Object.keys(counts).filter(k => k !== "all" && counts[k] > 0)];
+  const types = ["all", ...sectionOrder.filter(k => counts[k] > 0), ...Object.keys(counts).filter(k => k !== "all" && !sectionOrder.includes(k) && counts[k] > 0)];
   types.forEach(type => {
     const info = TYPE_LABELS[type] || { label: type, icon: "🎮" };
     const count = counts[type] || 0;
 
     const tab = document.createElement("button");
-    tab.className = "type-tab" + (type === currentType ? " active" : "");
+    tab.className = "type-tab";
+    tab.dataset.type = type;
     tab.innerHTML = "<span class='tab-icon'>" + info.icon + "</span>" + info.label + " " + count;
-    tab.onclick = () => { currentType = type; updateTypeTabs(); render(); };
+    tab.onclick = () => { scrollToType(type); };
     tabs.appendChild(tab);
 
     if (type !== "all") {
       const btn = document.createElement("button");
-      btn.className = "type-filter-btn" + (type === currentType ? " active" : "");
+      btn.className = "type-filter-btn";
       btn.dataset.type = type;
       btn.innerHTML = "<span class='type-filter-icon'>" + info.icon + "</span><span>" + info.label + "</span><span class='type-filter-count'>" + count + "</span>";
-      btn.onclick = () => { currentType = type; updateTypeTabs(); closeFilter(); render(); };
+      btn.onclick = () => { closeFilter(); scrollToType(type); };
       typeFilters.appendChild(btn);
     }
   });
 }
 
-function updateTypeTabs() {
-  const counts = {};
-  allEntries.forEach(e => { const t = getDisplayType(e); counts[t] = (counts[t]||0)+1; });
-  const types = ["all", ...Object.keys(counts).filter(k => k !== "all")];
-  document.querySelectorAll(".type-tab").forEach((tab, i) => tab.classList.toggle("active", types[i] === currentType));
-  document.querySelectorAll(".type-filter-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.type === currentType));
-}
+function updateTypeTabs() {}
 
 function setSort(dir) {
   currentSort = currentSort === dir ? null : dir;
@@ -529,7 +541,6 @@ function setSort(dir) {
 
 function render() {
   let entries = [...allEntries];
-  if (currentType !== "all") entries = entries.filter(e => getDisplayType(e) === currentType);
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
     entries = entries.filter(e => (e.name || "").toLowerCase().includes(q));
@@ -552,7 +563,7 @@ function render() {
     grouped[t].push(e);
   });
 
-  const sectionOrder = ["outfit","backpack","pickaxe","glider","emote","wrap","spray","contrail","loadingscreen","music","toy","vehicle","pet","shoes","bundle","other"];
+  const sectionOrder = ["outfit","pickaxe","emote","backpack","glider","wrap","spray","contrail","loadingscreen","toy","vehicle","pet","shoes","bundle","other","music"];
   const orderedKeys = [...sectionOrder.filter(k => grouped[k]), ...Object.keys(grouped).filter(k => !sectionOrder.includes(k))];
 
   const frag = document.createDocumentFragment();
@@ -572,6 +583,7 @@ function render() {
     block.className = "section-block";
     block.id = "section-" + secIdx;
     block.dataset.sectionIndex = secIdx;
+    block.dataset.type = type;
 
     const title = document.createElement("div");
     title.className = "section-title";
